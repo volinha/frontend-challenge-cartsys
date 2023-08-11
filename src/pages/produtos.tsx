@@ -1,6 +1,7 @@
 import type { RootState } from "../app/store";
 import { useSelector, useDispatch } from "react-redux";
-import { updateCode, updateIsActive, updateName, updateDescription, updatePrice, updateStock, resetForm } from "./slices/produtoSlice";
+import { updateCode, updateIsActive, updateName, updateDescription, updatePrice, updateStock, resetForm, ProductState } from "./slices/produtoSlice";
+import { useState } from "react";
 
 export default function Products() {
 
@@ -10,6 +11,30 @@ export default function Products() {
     const description = useSelector((state: RootState) => state.product.description);
     const price = useSelector((state: RootState) => state.product.price);
     const stock = useSelector((state: RootState) => state.product.stock);
+
+    const [newProduct, setNewProduct] = useState<ProductState[]>([]);
+    const [productList, setProductList] = useState([]);
+
+    function addProduct(product: ProductState) {
+        newProduct.push(product);
+
+        localStorage.setItem('products', JSON.stringify(newProduct));
+        dispatch(resetForm());
+    }
+
+    const getProducts = () => {
+        const data = localStorage.getItem('products');
+        if (data) {
+            setProductList(JSON.parse(data));
+        } else {
+            console.log("No data available.")
+        }
+    };
+
+    const clearProducts = () => {
+        localStorage.clear();
+        setProductList([]);
+    }
 
     const dispatch = useDispatch();
 
@@ -89,9 +114,22 @@ export default function Products() {
 
                 <button
                     className="p-2 mt-2 rounded bg-white text-slate-600 font-bold"
-                    onClick={() => dispatch(resetForm())}
-                >Salvar
+                    onClick={() => addProduct({ code, isActive, name, description, price, stock })}
+                >Adicionar
                 </button>
+                <button
+                    className="p-2 mt-2 rounded bg-white text-slate-600 font-bold"
+                    onClick={() => getProducts()}
+                >Listar produtos
+                </button>
+                <button
+                    className="p-2 mt-2 rounded bg-white text-slate-600 font-bold"
+                    onClick={() => clearProducts()}
+                >Limpar dados
+                </button>
+            {productList.map((product, index) => (
+                <div key={index}>{JSON.stringify(product)}</div>
+            ))}
             </div>
         </div>
     )
