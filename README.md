@@ -15,14 +15,14 @@
  
 ### Clientes
 
-- [ ] Adicionar
-- [ ] Visualizar
+- [x] Adicionar
+- [x] Visualizar
 - [ ] Remover
 
 ### Produtos
 
-- [ ] Adicionar
-- [ ] Visualizar
+- [x] Adicionar
+- [x] Visualizar
 - [ ] Remover
 
 ### Assistente
