@@ -15,6 +15,8 @@ const initialState: ClientState = {
   email: '',
 };
 
+const data: ClientState[] = [];
+
 export const clientSlice = createSlice({
   name: 'client',
   initialState,
@@ -32,7 +34,7 @@ export const clientSlice = createSlice({
       state.email = action.payload;
     },
     resetForm: (state) => {
-      return initialState;
+      return state = initialState;
     },
   },
 });

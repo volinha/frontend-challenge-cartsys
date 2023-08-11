@@ -2,6 +2,9 @@ import type { RootState } from "../app/store";
 import { useSelector, useDispatch } from "react-redux";
 import { updateCode, updateName, updateEmail, updateDocument, resetForm } from './slices/clienteSlice';
 
+import { ClientState } from './slices/clienteSlice';
+import { useState } from "react";
+
 export default function Client() {
 
     const code = useSelector((state: RootState) => state.client.code);
@@ -9,7 +12,30 @@ export default function Client() {
     const document = useSelector((state: RootState) => state.client.document);
     const email = useSelector((state: RootState) => state.client.email);
 
+    const [newClients, setNewClients] = useState<ClientState[]>([]);
+    const [clientList, setClientList] = useState([]);
+
     const dispatch = useDispatch();
+
+    function addUser(user: ClientState) {
+        newClients.push(user);
+        localStorage.setItem('clients', JSON.stringify(newClients));
+        dispatch(resetForm());
+    }
+
+    const getUsers = () => {
+        const data = localStorage.getItem('clients');
+        if (data) {
+            setClientList(JSON.parse(data));
+        } else {
+            console.log("No data available.")
+        }
+    };
+
+    const clearUsers = () => {
+        localStorage.clear();
+        setClientList([]);
+    }
 
     return (
         <div className="min-h-screen flex items-center justify-center gap-4">
@@ -63,10 +89,26 @@ export default function Client() {
                 </div>
                 <button
                     className="p-2 rounded bg-white text-slate-600 font-bold"
-                    onClick={() => dispatch(resetForm)}
-                >
+                    onClick={() => addUser({ code, name, document, email })}>
                     Salvar
                 </button>
+                <button
+                    className="p-2 rounded bg-white text-slate-600 font-bold"
+                    onClick={() => getUsers()}
+                >
+                    Listar usuários
+                </button>
+                <button
+                    className="p-2 rounded bg-white text-slate-600 font-bold"
+                    onClick={() => clearUsers()}
+                >
+                    Limpar dados
+                </button>
+                <div>
+                    {clientList.map((client, index) => (
+                        <div key={index}>{JSON.stringify(client)}</div>
+                    ))}
+                </div>
             </div>
         </div>
     )
