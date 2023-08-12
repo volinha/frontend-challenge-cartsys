@@ -3,9 +3,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateCode, updateName, updateEmail, updateDocument, resetForm } from './slices/clienteSlice';
 
 import { ClientState } from './slices/clienteSlice';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Client() {
+
+    useEffect(() => {
+        const storedClients = localStorage.getItem('clients');
+
+        if (storedClients) {
+            const parsedClients = JSON.parse(storedClients);
+            setNewClients(parsedClients);
+        }
+    }, []);
 
     const code = useSelector((state: RootState) => state.client.code);
     const name = useSelector((state: RootState) => state.client.name);
@@ -13,7 +22,7 @@ export default function Client() {
     const email = useSelector((state: RootState) => state.client.email);
 
     const [newClients, setNewClients] = useState<ClientState[]>([]);
-    const [clientList, setClientList] = useState([]);
+    const [clientList, setClientList] = useState<ClientState[]>([]);
 
     const dispatch = useDispatch();
 
