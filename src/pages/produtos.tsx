@@ -1,9 +1,18 @@
 import type { RootState } from "../app/store";
 import { useSelector, useDispatch } from "react-redux";
 import { updateCode, updateIsActive, updateName, updateDescription, updatePrice, updateStock, resetForm, ProductState } from "./slices/produtoSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Products() {
+
+    useEffect(() => {
+        const storedProducts = localStorage.getItem('products');
+
+        if (storedProducts) {
+            const parsedProducts = JSON.parse(storedProducts);
+            setNewProduct(parsedProducts);
+        }
+    }, []);
 
     const code = useSelector((state: RootState) => state.product.code);
     const isActive = useSelector((state: RootState) => state.product.isActive);
@@ -13,7 +22,7 @@ export default function Products() {
     const stock = useSelector((state: RootState) => state.product.stock);
 
     const [newProduct, setNewProduct] = useState<ProductState[]>([]);
-    const [productList, setProductList] = useState([]);
+    const [productList, setProductList] = useState<ProductState[]>([]);
 
     function addProduct(product: ProductState) {
         newProduct.push(product);
@@ -21,15 +30,6 @@ export default function Products() {
         localStorage.setItem('products', JSON.stringify(newProduct));
         dispatch(resetForm());
     }
-
-    const getProducts = () => {
-        const data = localStorage.getItem('products');
-        if (data) {
-            setProductList(JSON.parse(data));
-        } else {
-            console.log("No data available.")
-        }
-    };
 
     const clearProducts = () => {
         localStorage.clear();
@@ -116,11 +116,6 @@ export default function Products() {
                     className="p-2 mt-2 rounded bg-white text-slate-600 font-bold"
                     onClick={() => addProduct({ code, isActive, name, description, price, stock })}
                 >Adicionar
-                </button>
-                <button
-                    className="p-2 mt-2 rounded bg-white text-slate-600 font-bold"
-                    onClick={() => getProducts()}
-                >Listar produtos
                 </button>
                 <button
                     className="p-2 mt-2 rounded bg-white text-slate-600 font-bold"
