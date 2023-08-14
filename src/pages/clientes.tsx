@@ -6,7 +6,6 @@ import { addClient, clearClientList } from "../app/slices/listSlice";
 import { ClientState } from '../app/slices/clienteSlice';
 import { clearStatus, setStatus } from "../app/slices/statusSlice";
 
-import { PatternFormat } from "react-number-format";
 import { Link } from "react-router-dom";
 import { FormEvent } from "react";
 

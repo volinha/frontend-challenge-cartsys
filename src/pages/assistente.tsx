@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../app/store";
-import { decrementPage, finishBuy, incrementPage, updateCity, updateComplement, updateNeighborhood, updateNumber, updateParcels, updatePaymentMethod, updateSelectedClientCode, updateSelectedProductCode, updateStreet } from "../app/slices/assistenteSlice";
+import { decrementPage, finishBuy, incrementPage, updateCity, updateComplement, updateNeighborhood, updateNumber, updateParcels, updatePaymentMethod, updateSelectedClientCode, updateStreet } from "../app/slices/assistenteSlice";
 import { CreditCard, DotsThreeCircle, Money } from "@phosphor-icons/react";
 import { PurchaseState, addPurchase, updateProductSearch, updateSearchInput } from "../app/slices/listSlice";
 
