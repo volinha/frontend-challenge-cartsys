@@ -10,7 +10,7 @@ cd frontend-challenge-cartsys
 npm start
 ```
 
-O projeto abrirá automaticamente no navegador.
+O projeto abrirá automaticamente no navegador, ou acesse a versão publicada na Vercel [neste link](https://frontend-challenge-sepia-theta.vercel.app).
 
 ## Roadmap
 
