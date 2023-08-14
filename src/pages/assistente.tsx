@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../app/store";
-import { decrementPage, finishBuy, incrementPage, updateCity, updateComplement, updateNeighborhood, updateNumber, updateParcels, updatePaymentMethod, updateSelectedClientCode, updateSelectedProductCode, updateStreet } from "./slices/assistenteSlice";
+import { decrementPage, finishBuy, incrementPage, updateCity, updateComplement, updateNeighborhood, updateNumber, updateParcels, updatePaymentMethod, updateSelectedClientCode, updateSelectedProductCode, updateStreet } from "../app/slices/assistenteSlice";
 import { CreditCard, DotsThreeCircle, Money } from "@phosphor-icons/react";
-import { PurchaseState, addPurchase, updateProductSearch, updateSearchInput } from "./slices/listSlice";
+import { PurchaseState, addPurchase, updateProductSearch, updateSearchInput } from "../app/slices/listSlice";
 
-import { NumericFormat } from "react-number-format";
-import { setStatus } from "./slices/statusSlice";
+import { setStatus } from "../app/slices/statusSlice";
+import ProductCard from "../components/ProductCard";
 
 export default function Assistant() {
 
@@ -53,23 +53,6 @@ export default function Assistant() {
 
     const screenList = [1, 2, 3];
 
-    const handleSelectProduct = (code: number) => {
-        if (code === selectedProductCode) { code = -1 }
-        dispatch(updateSelectedProductCode(code));
-        const price = productList.find(product => product.code === code)?.price;
-
-        if (price) {
-            const newParcels: { number: number; total: number }[] = [];
-            for (let i = 1; i <= 12; i++) {
-                const total = price / i;
-                newParcels.push({ number: i, total });
-            }
-            /* console.log(newParcels); */
-
-            dispatch(updateParcels(newParcels));
-        }
-    }
-
     const handleSelectPaymentMethod = (code: number) => {
         if (code === selectedPaymentMethod) { code = -1 }
         dispatch(updatePaymentMethod(code));
@@ -91,9 +74,9 @@ export default function Assistant() {
                         city: city,
                         complement: complement
                     },
-                    totalPrice: selectedProduct.price
+                    totalPrice: selectedProduct.price,
+                    finishedAt: new Date(),
                 };
-                /* console.log(newPurchase) */
                 dispatch(addPurchase(newPurchase));
                 dispatch(setStatus({ isActive: true, message: "Compra realizada com sucesso!", type: "alert" }))
                 dispatch(finishBuy());
@@ -106,9 +89,9 @@ export default function Assistant() {
     const dispatch = useDispatch();
 
     return (
-        <div className="flex items-start justify-center min-h-[calc(100vh-68px)] gap-4 bg-slate-600 rounded-t text-white">
+        <div className="flex items-start justify-center gap-4 text-white rounded-t min-h-navbar bg-slate-600">
             <div className="flex flex-col w-screen min-h-full gap-4 p-4 rounded-t bg-slate-600">
-                <div className="flex items-center justify-around w-full gap-10 text-white">
+                <div className="flex items-center justify-around w-full text-white">
                     {screenList.map((screenNumber, index) => (
                         <span key={index} className={`px-2 border rounded-full aspect-square ${screenNumber === screen ? "bg-white text-black" : ""}`}>{screenNumber}</span>
                     ))}
@@ -149,22 +132,7 @@ export default function Assistant() {
                         />
                         <div className="grid grid-cols-4 gap-2">
                             {(searchInput ? searchProductList : productList).map(product => (
-                                <div
-                                    key={product.code}
-                                    className={`relative flex flex-col p-2 rounded min-w-[10rem] aspect-square items-center justify-between hover:bg-slate-400 cursor-pointer 
-                                ${selectedProductCode === product.code ? "border bg-slate-500 border-slate-300" : "bg-slate-700"}`}
-                                    onClick={() => handleSelectProduct(product.code)}
-                                >
-                                    <img src={product.image ? product.image : "https://picsum.photos/200/300"} alt={product.name} className="object-none rounded aspect-video" />
-                                    <div className="flex flex-col items-start justify-start p-2">
-                                        <span className="text-xl font-bold">{product.name}</span>
-                                        <span className="text-sm">
-                                            <NumericFormat value={product.price} displayType={'text'} thousandSeparator="," decimalSeparator='.' prefix={'R$'} />
-                                        </span>
-                                        <span>Estoque: {product.stock} un</span>
-
-                                    </div>
-                                </div>
+                                <ProductCard key={product.code} product={product} select={product.stock > 0} />
                             ))}
                             {searchInput && searchProductList.length === 0 && <div>A busca não retornou resultados.</div>}
                         </div>
@@ -212,7 +180,6 @@ export default function Assistant() {
                 }
                 {screen === 3 &&
                     <div className="flex items-center justify-center w-full ">
-                        {/* form de endereço e finalizar compra */}
                         <form action="" className="flex flex-col gap-2">
                             <div className="flex flex-col items-start justify-center gap-2">
                                 <label htmlFor="rua" className="text-white">Rua</label>
@@ -272,7 +239,7 @@ export default function Assistant() {
                         </form>
                     </div>
                 }
-                <div className="flex items-center justify-between w-full">
+                <div className="flex items-center justify-around w-full">
                     <button
                         onClick={() => dispatch(decrementPage())}
                         disabled={screen === 1}
@@ -305,5 +272,3 @@ export default function Assistant() {
         </div>
     )
 }
-
-// todo: add tailwind clsx 

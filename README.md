@@ -4,26 +4,26 @@
 
 - [x] Criar esqueleto (CRA + Páginas + Tailwind)
 - [x] Estilização básica
-- [ ] Criar formulários
+- [x] Criar formulários
 - [x] Adicionar ações aos formulários
 - [x] Gerenciamento de estados básicos (redux-toolkit)
 - [x] Adicionar persistência dos dados (redux-persist)
 - [x] Logar usuário
-- [ ] [Clientes](#clientes)
-- [ ] [Produtos](#produtos)
+- [x] [Clientes](#clientes)
+- [x] [Produtos](#produtos)
 - [x] [Assistente](#assistente)
  
 ### Clientes
 
 - [x] Adicionar
 - [x] Visualizar
-- [ ] Remover
+- [x] Remover
 
 ### Produtos
 
 - [x] Adicionar
 - [x] Visualizar
-- [ ] Remover
+- [x] Remover
 
 ### Assistente
 

@@ -5,6 +5,9 @@ module.exports = {
     "./src/pages/*.{ts,tsx,js,jsx}",
   ],
   theme: {
+    minHeight: {
+      navbar: 'calc(100vh - 210px)',
+    },
     extend: {},
   },
   plugins: [],

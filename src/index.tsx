@@ -19,6 +19,8 @@ import { Provider } from 'react-redux';
 import { store, persistor } from './app/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import Alert from './components/Alert';
+import ListClients from './pages/listClients';
+import ListProducts from './pages/listProducts';
 
 
 const router = createBrowserRouter([
@@ -42,10 +44,24 @@ const router = createBrowserRouter([
       </Navbar>
   },
   {
+    path: "produtos/listar",
+    element:
+      <Navbar>
+        <ListProducts />
+      </Navbar>
+  },
+  {
     path: "clientes/",
     element:
       <Navbar>
         <Client />
+      </Navbar>
+  },
+  {
+    path: "clientes/listar",
+    element:
+      <Navbar>
+        <ListClients />
       </Navbar>
   },
   {

@@ -1,10 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import productReducer from "../pages/slices/produtoSlice";
-import clientReducer from "../pages/slices/clienteSlice";
-import userReducer from "../pages/slices/usuarioSlice";
-import assistantReducer from "../pages/slices/assistenteSlice";
-import listReducer from "../pages/slices/listSlice";
-import statusReducer from "../pages/slices/statusSlice";
+import productReducer from "./slices/produtoSlice";
+import clientReducer from "./slices/clienteSlice";
+import userReducer from "./slices/usuarioSlice";
+import assistantReducer from "./slices/assistenteSlice";
+import listReducer from "./slices/listSlice";
+import statusReducer from "./slices/statusSlice";
 
 // redux-persist
 import storage from 'redux-persist/lib/storage';

@@ -9,6 +9,7 @@ export interface PurchaseState {
   product: ProductState;
   address: AddressState;
   totalPrice: number;
+  finishedAt: Date;
 }
 
 export interface ListState {
@@ -34,11 +35,24 @@ export const listSlice = createSlice({
     addClient: (state, action: PayloadAction<ClientState>) => {
       state.clients.push(action.payload);
     },
+    removeClient: (state, action: PayloadAction<number>) => {
+      state.clients = state.clients.filter((client) => client.code !== action.payload);
+    },
     addProduct: (state, action: PayloadAction<ProductState>) => {
-      if(!!action.payload.image) { action.payload.image = 'https://picsum.photos/300/200' }
+      if(action.payload.image === '') { action.payload.image = 'https://picsum.photos/300/200' }
       state.products.push(action.payload);
     },
+    removeProduct: (state, action: PayloadAction<number>) => {
+      state.products = state.products.filter((product) => product.code !== action.payload);
+    },
     addPurchase: (state, action: PayloadAction<PurchaseState>) => {
+      // get purchased product item and subtract 1 from stock
+      state.products = state.products.map((product) => {
+        if (product.code === action.payload.product.code) {
+          product.stock--;
+        }
+        return product;
+      })
       state.purchases.push(action.payload);
     },
     updateSearchInput: (state, action: PayloadAction<string>) => {
@@ -61,5 +75,5 @@ export const listSlice = createSlice({
   },
 });
 
-export const { addClient, addProduct, addPurchase, updateSearchInput, updateProductSearch, clearClientList, clearProductList, clearPurchaseList } = listSlice.actions;
+export const { addClient, removeClient, addProduct, removeProduct, addPurchase, updateSearchInput, updateProductSearch, clearClientList, clearProductList, clearPurchaseList } = listSlice.actions;
 export default listSlice.reducer;
