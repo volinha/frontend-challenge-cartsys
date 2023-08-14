@@ -1,7 +1,7 @@
 {
   "name": "desafio-cartsys",
   "version": "1.0.0",
-  "homepage": "https://volinha.github.io/frontend-challenge-cartsys/",
+  "homepage": "https://volinha.github.io/",
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
