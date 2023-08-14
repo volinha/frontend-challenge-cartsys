@@ -1,5 +1,17 @@
 # Frontend-Challenge
 
+## Como testar?
+
+Clonar este repositório, instalar e `npm start`
+
+```
+git clone https://github.com/volinha/frontend-challenge-cartsys
+cd frontend-challenge-cartsys
+npm start
+```
+
+O projeto abrirá automaticamente no navegador.
+
 ## Roadmap
 
 - [x] Criar esqueleto (CRA + Páginas + Tailwind)
