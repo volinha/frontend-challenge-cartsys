@@ -11,7 +11,7 @@ function App() {
   const dispatch = useDispatch();
 
   return (
-    <main className="flex flex-col items-center min-h-navbar bg-slate-500">
+    <main className="flex flex-col items-center min-h-screen bg-slate-500">
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex flex-col items-center justify-center w-full gap-2 p-4 rounded bg-slate-700">
           <span className="text-white">Efetue o login para começar</span>
