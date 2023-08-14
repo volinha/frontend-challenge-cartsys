@@ -13,10 +13,13 @@ import Home from './pages/home';
 import Products from './pages/produtos';
 import Client from './pages/clientes';
 import Assistant from './pages/assistente';
+import Navbar from './components/Navbar';
 
 import { Provider } from 'react-redux';
 import { store, persistor } from './app/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import Alert from './components/Alert';
+
 
 const router = createBrowserRouter([
   {
@@ -26,19 +29,31 @@ const router = createBrowserRouter([
   },
   {
     path: 'home/',
-    element: <Home />
+    element:
+      <Navbar>
+        <Home />
+      </Navbar>
   },
   {
     path: "produtos/",
-    element: <Products />
+    element:
+      <Navbar>
+        <Products />
+      </Navbar>
   },
   {
     path: "clientes/",
-    element: <Client />
+    element:
+      <Navbar>
+        <Client />
+      </Navbar>
   },
   {
     path: "assistente/",
-    element: <Assistant />
+    element:
+      <Navbar>
+        <Assistant />
+      </Navbar>
   },
 ])
 
@@ -49,7 +64,8 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <RouterProvider router={router} />
+          <Alert />
+          <RouterProvider router={router} />
       </PersistGate>
     </Provider>
   </React.StrictMode>

@@ -1,26 +1,27 @@
 import { Barcode, Headset, Users } from "@phosphor-icons/react";
+import { Link } from "react-router-dom";
 
 export default function Page() {
     return (
-        <div className="min-h-screen flex items-center justify-center gap-4 text-white">
-            <a href="/produtos">
-                <div className="w-40 aspect-square rounded bg-slate-600 flex flex-col gap-2 items-center justify-center hover:bg-slate-500">
+        <div className="flex items-center justify-center min-h-[calc(100vh-68px)] gap-4 text-white">
+            <Link to="/produtos">
+                <div className="flex flex-col items-center justify-center w-40 gap-2 rounded aspect-square bg-slate-600 hover:bg-slate-500">
                     <Barcode size={32} color="#fef6f6" />
                     <span>Produtos</span>
                 </div>
-            </a>
-            <a href="/clientes">
-            <div className="w-40 aspect-square rounded bg-slate-600 flex flex-col gap-2 items-center justify-center hover:bg-slate-500">
+            </Link>
+            <Link to="/clientes">
+            <div className="flex flex-col items-center justify-center w-40 gap-2 rounded aspect-square bg-slate-600 hover:bg-slate-500">
                 <Users size={32} color="#fef6f6" />
                 <span>Clientes</span>
             </div>
-            </a>
-            <a href="/assistente">
-            <div className="w-40 aspect-square rounded bg-slate-600 flex flex-col gap-2 items-center justify-center hover:bg-slate-500">
+            </Link>
+            <Link to="/assistente">
+            <div className="flex flex-col items-center justify-center w-40 gap-2 rounded aspect-square bg-slate-600 hover:bg-slate-500">
                 <Headset size={32} color="#fef6f6" />
                 <span>Assistente</span>
             </div>
-            </a>
+            </Link>
         </div>
     )
 }

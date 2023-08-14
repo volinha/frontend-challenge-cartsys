@@ -10,6 +10,10 @@ function App() {
 
   const dispatch = useDispatch();
 
+  function setUser(){
+    localStorage.setItem('user', JSON.stringify(name));
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center bg-slate-400">
       <div className="flex items-center justify-center min-h-screen">
@@ -23,7 +27,7 @@ function App() {
           onChange={(e) => dispatch(updateName(e.target.value))}
           />
           <input type="password" className="rounded p-2" placeholder="Senha" />
-          <a href="/home" className="min-w-full">
+          <a href="/home" className="min-w-full" onClick={() => setUser()}>
             <button className="rounded p-2 w-full bg-white hover:bg-white/90">Entrar</button>
           </a>
           <a href="/404" className="text-blue-500 hover:text-blue-400">Esqueci minha senha</a>

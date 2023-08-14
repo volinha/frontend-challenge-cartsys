@@ -8,6 +8,7 @@ export interface ProductState {
   description: string;
   price: number;
   stock: number;
+  image: string
 }
 
 const initialState: ProductState = {
@@ -17,6 +18,7 @@ const initialState: ProductState = {
     description: '',
     price: 0,
     stock: 0,
+    image: '',
 };
 
 export const productSlice = createSlice({
@@ -41,12 +43,15 @@ export const productSlice = createSlice({
     updateStock: (state, action: PayloadAction<number>) => {
       state.stock = action.payload;
     },
+    updateImage: (state, action: PayloadAction<string>) => {
+      state.image = action.payload;
+    },
     resetForm: () => {
       return initialState;
     },
   },
 });
 
-export const { updateCode, updateIsActive, updateName, updateDescription, updatePrice, updateStock, resetForm } = productSlice.actions;
+export const { updateCode, updateIsActive, updateName, updateDescription, updatePrice, updateStock, updateImage, resetForm } = productSlice.actions;
 
 export default productSlice.reducer;

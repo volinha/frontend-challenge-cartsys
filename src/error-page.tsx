@@ -12,9 +12,10 @@ export default function ErrorPage() {
     const routeError = error as RouteError;
 
     return (
-        <div>
+        <div className="flex flex-col items-center justify-center min-h-screen text-white bg-black">
             <h1>Oops!</h1>
-            <p>Sorry, an unexpected error has occurred.</p>
+            <p>Acho que você acabou errando o caminho</p>
+            <p className="text-sm italic">ou a rota...</p>
             <p>
                 <i>{routeError.statusText || routeError.message}</i>
             </p>

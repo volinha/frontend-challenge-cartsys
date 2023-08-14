@@ -15,8 +15,6 @@ const initialState: ClientState = {
   email: '',
 };
 
-const data: ClientState[] = [];
-
 export const clientSlice = createSlice({
   name: 'client',
   initialState,
